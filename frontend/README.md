@@ -1,3 +1,9 @@
+# Para rodar a aplicação via Docker
+
+docker build -t angular-kanban .
+
+docker run -d -p 4200:80 --name angular-kanban angular-kanban
+
 # KanbanFrontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
