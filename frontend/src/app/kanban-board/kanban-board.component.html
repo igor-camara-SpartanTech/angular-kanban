@@ -1,0 +1,126 @@
+<div class="kanban-container">
+    <h1>Quadro Kanban</h1>
+    
+    <div class="board-container">
+      <div class="column">
+        <div class="column-header">
+          <h2>A Fazer</h2>
+          <button (click)="openTaskDialog('todo')" class="add-button">+</button>
+        </div>
+        <div
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="todo"
+          [cdkDropListConnectedTo]="[inProgressList, testingList, doneList]"
+          (cdkDropListDropped)="drop($event)"
+          class="tasks-container"
+        >
+          <div class="task" *ngFor="let task of todo" cdkDrag>
+            <div class="task-header">
+              <h3>{{ task.title }}</h3>
+              <span class="priority-badge" [ngClass]="'priority-' + task.priority">
+                {{ task.priority }}
+              </span>
+            </div>
+            <p>{{ task.description }}</p>
+            <div class="task-footer">
+              <span *ngIf="task.assignee">{{ task.assignee }}</span>
+              <span *ngIf="task.dueDate">{{ task.dueDate | date }}</span>
+              <button (click)="removeTask('todo', task.id)" class="remove-button">x</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="column">
+        <div class="column-header">
+          <h2>Em Progresso</h2>
+          <button (click)="openTaskDialog('inProgress')" class="add-button">+</button>
+        </div>
+        <div
+          cdkDropList
+          #inProgressList="cdkDropList"
+          [cdkDropListData]="inProgress"
+          [cdkDropListConnectedTo]="[todoList, testingList, doneList]"
+          (cdkDropListDropped)="drop($event)"
+          class="tasks-container"
+        >
+          <div class="task" *ngFor="let task of inProgress" cdkDrag>
+            <div class="task-header">
+              <h3>{{ task.title }}</h3>
+              <span class="priority-badge" [ngClass]="'priority-' + task.priority">
+                {{ task.priority }}
+              </span>
+            </div>
+            <p>{{ task.description }}</p>
+            <div class="task-footer">
+              <span *ngIf="task.assignee">{{ task.assignee }}</span>
+              <span *ngIf="task.dueDate">{{ task.dueDate | date }}</span>
+              <button (click)="removeTask('inProgress', task.id)" class="remove-button">x</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="column">
+        <div class="column-header">
+          <h2>Testando</h2>
+          <button (click)="openTaskDialog('testing')" class="add-button">+</button>
+        </div>
+        <div
+          cdkDropList
+          #testingList="cdkDropList"
+          [cdkDropListData]="testing"
+          [cdkDropListConnectedTo]="[todoList, inProgressList, doneList]"
+          (cdkDropListDropped)="drop($event)"
+          class="tasks-container"
+        >
+          <div class="task" *ngFor="let task of testing" cdkDrag>
+            <div class="task-header">
+              <h3>{{ task.title }}</h3>
+              <span class="priority-badge" [ngClass]="'priority-' + task.priority">
+                {{ task.priority }}
+              </span>
+            </div>
+            <p>{{ task.description }}</p>
+            <div class="task-footer">
+              <span *ngIf="task.assignee">{{ task.assignee }}</span>
+              <span *ngIf="task.dueDate">{{ task.dueDate | date }}</span>
+              <button (click)="removeTask('testing', task.id)" class="remove-button">x</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="column">
+        <div class="column-header">
+          <h2>Concluído</h2>
+          <button (click)="openTaskDialog('done')" class="add-button">+</button>
+        </div>
+        <div
+          cdkDropList
+          #doneList="cdkDropList"
+          [cdkDropListData]="done"
+          [cdkDropListConnectedTo]="[todoList, inProgressList, testingList]"
+          (cdkDropListDropped)="drop($event)"
+          class="tasks-container"
+        >
+          <div class="task" *ngFor="let task of done" cdkDrag>
+            <div class="task-header">
+              <h3>{{ task.title }}</h3>
+              <span class="priority-badge" [ngClass]="'priority-' + task.priority">
+                {{ task.priority }}
+              </span>
+            </div>
+            <p>{{ task.description }}</p>
+            <div class="task-footer">
+              <span *ngIf="task.assignee">{{ task.assignee }}</span>
+              <span *ngIf="task.dueDate">{{ task.dueDate | date }}</span>
+              <button (click)="removeTask('done', task.id)" class="remove-button">x</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h6 class="footer">(Não temos dinheiro para um backend, então não recarregue a página após criar novos cards kkk)</h6>
+  </div>
