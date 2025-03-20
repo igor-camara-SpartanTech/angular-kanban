@@ -1,8 +1,16 @@
 # Para rodar a aplicação via Docker
 
-docker build -t angular-kanban .
+```bash
+docker-compose up --build -d
 
-docker run -d -p 4200:80 --name angular-kanban angular-kanban
+```
+Nas versões mais antigas do docker-compose
+
+```bash
+docker compose up --build -d
+
+```
+Nas versões mais novas do docker-compose
 
 # KanbanFrontend
 
